@@ -1,6 +1,6 @@
-export default equlizer($items, $itemsToEquilize, debug){
+export default function equalizer($itemsToEquilizer, debug){
     var highest;
-    var caseItems = $('.case-study-item');
+    var caseItems = $itemsToEquilizer;
     var itemHeightPrevious;
     var itemHeights = [];
 
@@ -25,5 +25,5 @@ export default equlizer($items, $itemsToEquilize, debug){
         console.log('highest = ', highest);
     }
     
-    $itemsToEquilize.css('height', highest);
+    $itemsToEquilizer.css('height', highest);
 }
