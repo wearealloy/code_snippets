@@ -4,19 +4,32 @@ export default function equalizer($itemsToEquilizer, debug){
     var itemHeightPrevious;
     var itemHeights = [];
 
-    caseItems.each(function(){
+    if(debug){
+        console.log( 'items to be equilized ', caseItems);
+    }    
+
+    caseItems.each(function(i){
         var itemHeight = $(this).innerHeight();
         if(itemHeightPrevious){
-            if(itemHeight > itemHeightPrevious){
+            if(itemHeight > highest){
                 highest = itemHeight;
+                if(debug){
+                    console.log(itemHeight + ' vs ' + itemHeightPrevious + ' number picked = ' + highest);
+                }
             }
-            itemHeightPrevious = $(this).innerHeight();
+            if(debug){
+                console.log('Highest still = ' + highest);
+            }
+            itemHeightPrevious = itemHeight;
         }else{
-            itemHeightPrevious = $(this).innerHeight();
-            highest = itemHeightPrevious;
+            itemHeightPrevious = itemHeight;
+            highest = itemHeight;
+            if(debug){
+                console.log('First number picked, current highest = ' + highest);
+            }
         }
         if(debug){
-            itemHeights.push($(this).innerHeight());
+            itemHeights.push(itemHeight);
         }
     })
 
@@ -25,5 +38,5 @@ export default function equalizer($itemsToEquilizer, debug){
         console.log('highest = ', highest);
     }
     
-    $itemsToEquilizer.css('height', highest);
+    $itemsToEquilizer.css('min-height', highest);
 }
