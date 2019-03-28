@@ -7,7 +7,7 @@ export default function equalizer($itemsToEquilizer, debug){
     if(debug){
         console.log( 'items to be equilized ', caseItems);
     }    
-
+    caseItems.css('height', 'auto');
     caseItems.each(function(i){
         var itemHeight = $(this).innerHeight();
         if(itemHeightPrevious){
@@ -38,5 +38,5 @@ export default function equalizer($itemsToEquilizer, debug){
         console.log('highest = ', highest);
     }
     
-    $itemsToEquilizer.css('min-height', highest);
+    $itemsToEquilizer.css('height', highest);
 }
