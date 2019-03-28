@@ -1,4 +1,4 @@
-export default function equalizer($itemsToEquilizer, debug){
+export default function equalizer($itemsToEquilizer, /*responsive,*/ debug){
     var highest;
     var caseItems = $itemsToEquilizer;
     var itemHeightPrevious;
@@ -38,5 +38,11 @@ export default function equalizer($itemsToEquilizer, debug){
         console.log('highest = ', highest);
     }
     
+    // if(responsive){
+    //     $(window).resize(function(){
+
+    //     })
+    // }
+
     $itemsToEquilizer.css('height', highest);
 }

@@ -1,4 +1,4 @@
-function svgPathPrepare() {
+export default function svgPathPrepare() {
     var svgs = [];
     svgs = document.querySelectorAll('[data-svgAnimate]');
 
