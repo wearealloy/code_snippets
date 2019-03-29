@@ -1,48 +1,73 @@
-export default function equalizer($itemsToEquilizer, /*responsive,*/ debug){
+function alloyEqualizer({
+    responsive = true,
+    debug = false
+} = {}) {
+
     var highest;
-    var caseItems = $itemsToEquilizer;
-    var itemHeightPrevious;
-    var itemHeights = [];
+    var equilizerContainers = $('[data-alloyEquilize]');
+    var windowWidth = $(window).width();
 
-    if(debug){
-        console.log( 'items to be equilized ', caseItems);
-    }    
-    caseItems.css('height', 'auto');
-    caseItems.each(function(i){
-        var itemHeight = $(this).innerHeight();
-        if(itemHeightPrevious){
-            if(itemHeight > highest){
-                highest = itemHeight;
-                if(debug){
-                    console.log(itemHeight + ' vs ' + itemHeightPrevious + ' number picked = ' + highest);
+    equilizerContainers.each(function (i) {
+      
+        var equilizerItems = $(this).find('[data-alloyEquilize-watch]');
+        var bp = $(this).data('alloyequilizeResponsive');
+        var responsiveStop = bp ? responsiveStop = bp : responsiveStop = 0;
+      
+        var itemHeightPrevious;
+        var itemHeights = [];
+        if (debug) {
+            console.log('items to be equilized: ', equilizerItems);
+            if(responsive){
+            console.log('breakpoint: ', responsiveStop);
+            }
+        }
+        equilizerItems.css('min-height', 'auto');
+        if (windowWidth > responsiveStop) {
+            equilizerItems.each(function (i) {
+                var itemHeight = $(this).innerHeight();
+                if (itemHeightPrevious) {
+                    if (itemHeight > highest) {
+                        highest = itemHeight;
+                        if (debug) {
+                            console.log(itemHeight + ' vs ' + itemHeightPrevious + ' number picked = ' + highest);
+                        }
+                    }
+                    if (debug) {
+                        console.log('Highest still = ' + highest);
+                    }
+                    itemHeightPrevious = itemHeight;
+                } else {
+                    itemHeightPrevious = itemHeight;
+                    highest = itemHeight;
+                    if (debug) {
+                        console.log('First number picked, current highest = ' + highest);
+                    }
                 }
-            }
-            if(debug){
-                console.log('Highest still = ' + highest);
-            }
-            itemHeightPrevious = itemHeight;
-        }else{
-            itemHeightPrevious = itemHeight;
-            highest = itemHeight;
-            if(debug){
-                console.log('First number picked, current highest = ' + highest);
-            }
+                if (debug) {
+                    itemHeights.push(itemHeight);
+                }
+            })
         }
-        if(debug){
-            itemHeights.push(itemHeight);
+        if (debug) {
+                console.log('item heights', itemHeights);
+                console.log('highest = ', highest); 
         }
-    })
+        equilizerItems.css('min-height', highest);
+    });
 
-    if(debug){
-        console.log('item heights', itemHeights);
-        console.log('highest = ', highest);
+    if (responsive) {
+        $(window).resize(function () {
+            if (debug) {
+                alloyEqualizer({
+                    debug: true,
+                    responsive: false
+                });
+            } else {
+                alloyEqualizer({
+                  responsive: false
+                });
+            }
+        })
     }
-    
-    // if(responsive){
-    //     $(window).resize(function(){
 
-    //     })
-    // }
-
-    $itemsToEquilizer.css('height', highest);
 }
