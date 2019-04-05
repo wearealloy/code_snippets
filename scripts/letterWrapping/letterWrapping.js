@@ -1,15 +1,29 @@
-export default function letterWrapping(element, className){
-	var charactersFromElement;
-	var newCharacters = [];
+export default function letterWrapping(){
 
-	if(element.length > 0){
-		charactersFromElement = element.text().split("");
+    var lettersContainer = $('[data-letterWrapping]');
 
-		for (var i = 0; i < charactersFromElement.length; i++) {
-			newCharacters.push("<div>" + charactersFromElement[i] + "</div>");
-		}
-		
-	}
+    lettersContainer.each(function (i){
+        var charactersFromElement;
+        var newCharacters = [];
+        var wrapper;
 
-	return newCharacters;
+        $(this).data('wrapper') == undefined ||  $(this).data('wrapper').length == 0 ? wrapper = 'span' : wrapper = $(this).data('wrapper');
+
+        charactersFromElement = $(this).text().split("");
+
+        if($(this).data('wrappingclass') != undefined ){
+            var className;
+            $(this).data('wrappingclass').length == 0 ? className = 'letter' : className = $(this).data('wrappingclass');
+            for (var i = 0; i < charactersFromElement.length; i++) {
+                newCharacters.push(`<${wrapper} class="${className}">${charactersFromElement[i]}</${wrapper}>`);
+            }
+        }else{
+            for (var i = 0; i < charactersFromElement.length; i++) {
+                newCharacters.push(`<${wrapper}>${charactersFromElement[i]}</${wrapper}>`);
+            }
+        }
+
+        $(this).empty();
+        $(this).html(newCharacters);
+    })
 }
