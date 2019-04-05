@@ -5,12 +5,12 @@ Function that wraps all the letters inside an element with a specific html eleme
 Eg: `<h1>Hello</h1>` to
 
 ```
-<h1>
-	<span>H</span>
-	<span>e</span>
-	<span>l</span>
-	<span>l</span>
-	<span>o</span>
+<h1 data-letterWrapping>
+  <span>H</span>
+  <span>e</span>
+  <span>l</span>
+  <span>l</span>
+  <span>o</span>
 </h1>
 ```
 
