@@ -4,19 +4,19 @@ function alloyEqualizer({
 } = {}) {
 
     var highest;
-    var equilizerContainers = $('[data-alloyEquilize]');
+    var equilizerContainers = $('[data-alloyEqualize]');
     var windowWidth = $(window).width();
 
     equilizerContainers.each(function (i) {
       
-        var equilizerItems = $(this).find('[data-alloyEquilize-watch]');
-        var bp = $(this).data('alloyequilizeResponsive');
+        var equilizerItems = $(this).find('[data-alloyEqualize-watch]');
+        var bp = $(this).data('alloyequalizeResponsive');
         var responsiveStop = bp ? responsiveStop = bp : responsiveStop = 0;
       
         var itemHeightPrevious;
         var itemHeights = [];
         if (debug) {
-            console.log('items to be equilized: ', equilizerItems);
+            console.log('items to be equalized: ', equilizerItems);
             if(responsive){
             console.log('breakpoint: ', responsiveStop);
             }
