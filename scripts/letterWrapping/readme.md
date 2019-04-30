@@ -47,3 +47,18 @@ Then just called the function `letterWrapping()` in your main js file.
 </h1>
 ```
 
+`data-spaces` : Replaces spaces with `&nbsp;` entities so they are taken into consideration. Eg:
+
+```<h1 data-wrappingClass="bold" data-wrapper="div">  
+<h1 data-spaces data-wrapper="div">  
+  <div>H</div>
+  <div>i</div>
+  <div>&nbsp;</div>
+  <div>W</div>
+  <div>o</div>
+  <div>r</div>
+  <div>d</div>
+  <div>!</div>
+</h1>
+```
+
